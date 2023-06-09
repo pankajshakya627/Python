@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask REST API - Books</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Flask REST API - Books</h1>
+    <h2>Add Book</h2>
+    <form action="/books" method="POST">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="author" placeholder="Author">
+        <button type="submit">Add</button>
+    </form>
+    <h2>Books</h2>
+    <ul>
+        {% for book in books %}
+            <li>
+                {{ book.title }} - {{ book.author }}
+                <form action="/books/{{ book.id }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="/books/{{ book.id }}/edit">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>

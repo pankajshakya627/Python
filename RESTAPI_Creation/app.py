@@ -21,12 +21,11 @@ def handle_books():
     else:
         return render_template('index.html', books=books)
 
-@app.route('/books/<int:book_id>', methods=['POST'])
+@app.route('/books/<int:book_id>', methods=['POST', 'GET'])
 def delete_book(book_id):
-    if 'title' in request.form:
-        title = request.form['title']
+    if request.method == 'POST':
         for book in books:
-            if book['id'] == book_id and book['title'] == title:
+            if book['id'] == book_id:
                 books.remove(book)
                 return redirect(url_for('index'))  # Redirect to homepage after deleting a book
         return jsonify({"message": "Book not found"}), 404
@@ -49,12 +48,24 @@ def book_details(book_id):
                 return render_template('edit_book.html', book=book)
         return jsonify({"message": "Book not found"}), 404
 
-@app.route('/books/<int:book_id>/edit', methods=['GET'])
+@app.route('/books/<int:book_id>/edit', methods=['GET', 'POST'])
 def edit_book(book_id):
-    for book in books:
-        if book['id'] == book_id:
-            return render_template('edit_book.html', book=book)
-    return jsonify({"message": "Book not found"}), 404
+    if request.method == 'POST':
+        new_title = request.form['title']
+        new_author = request.form['author']
+        for book in books:
+            if book['id'] == book_id:
+                book['title'] = new_title
+                book['author'] = new_author
+                return redirect(url_for('index'))  # Redirect to homepage after updating a book
+        return jsonify({"message": "Book not found"}), 404
+    else:
+        for book in books:
+            if book['id'] == book_id:
+                return render_template('edit_book.html', book=book)
+        return jsonify({"message": "Book not found"}), 404
+
+
 
 @app.route('/')
 def index():

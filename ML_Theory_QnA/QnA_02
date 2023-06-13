@@ -8,6 +8,11 @@ y = w*x + b
 Hyperparameters
 Hyperparameters are parameters whose values control the learning process. These are adjustable parameters used to obtain an optimal model.
 External Parameters.
+
 Learning rate
 Number of Epochs
 n_estimators
+
+
+Hyperparameter Tuning refers to the process of choosing the optimum set of hyperparameters for a Machine Learning model. This process is also
+called Hyperparameter Optimization.

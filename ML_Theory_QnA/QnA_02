@@ -1,0 +1,13 @@
+Types of Parameters
+Parameters
+Model Parameters
+These are the parameters of the model that can be determined by training with training data. These can be considered as internal Parameters.
+Weights
+Bias
+y = w*x + b
+Hyperparameters
+Hyperparameters are parameters whose values control the learning process. These are adjustable parameters used to obtain an optimal model.
+External Parameters.
+Learning rate
+Number of Epochs
+n_estimators
